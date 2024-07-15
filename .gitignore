@@ -1,0 +1,6 @@
+dbt-fundamentals-jsp
+test
+notes.txt
+.DS_Store
+jaffle_shop/target/
+logs/
