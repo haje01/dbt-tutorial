@@ -1,8 +1,10 @@
+import os
+import logging
+from pathlib import Path
+
 import psycopg2
 import pandas as pd
-import logging
-import os
-from pathlib import Path
+
 
 logging.basicConfig(
     level=logging.INFO,

@@ -4,3 +4,4 @@ notes.txt
 .DS_Store
 jaffle_shop/target/
 logs/
+.env
