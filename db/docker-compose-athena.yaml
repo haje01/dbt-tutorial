@@ -1,7 +1,7 @@
 version: '3'
 
 services:
-  create-db:
+  init-athena:
     build: 
       context: athena
       dockerfile: Dockerfile

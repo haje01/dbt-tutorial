@@ -17,8 +17,6 @@ S3_BUCKET, S3_BASE = re.search(r's3://([^/]+)/(.*)', S3_BUCKET_BASE).groups()
 S3_OUTPUT_LOCATION = os.getenv('S3_OUTPUT_LOCATION')
 USER_ID = os.getenv('USER_ID')
 
-print("ACCESS_KEY: ", ACCESS_KEY)
-print("SECRET_KEY: ", SECRET_KEY)
 print("S3_BUCKET_BASE: ", S3_BUCKET_BASE)
 print("S3_BUCKET: ", S3_BUCKET)
 print("S3_BASE: ", S3_BASE)
@@ -113,7 +111,7 @@ if __name__ == "__main__":
     # 파일을 S3에 업로드 
     for file, file_dir in files.items():
         local_path = str(Path(__file__).resolve().parent.parent / "data/{}".format(file))
-        s3_path = "{}/{}/{}/{}".format(S3_BASE, USER_ID, file_dir, file)
+        s3_path = "{}/{}/raw/{}/{}".format(S3_BASE, USER_ID, file_dir, file)
         print(local_path, s3_path)
         upload_to_aws(local_path, S3_BUCKET, s3_path)
 

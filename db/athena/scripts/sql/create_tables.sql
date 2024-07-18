@@ -6,7 +6,8 @@ CREATE DATABASE IF NOT EXISTS dbt_{user}_stripe;
 CREATE EXTERNAL TABLE IF NOT EXISTS dbt_{user}_jaffle_shop.customers (
     id int,
     first_name string,
-    last_name string
+    last_name string,
+    updated string
 )
 ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
 WITH SERDEPROPERTIES (
@@ -14,7 +15,7 @@ WITH SERDEPROPERTIES (
     'quoteChar' = '"',
     'skip.header.line.count' = '1'
 ) 
-LOCATION '{bucket_base}/{user}/customers/'
+LOCATION '{bucket_base}/{user}/raw/customers/'
 TBLPROPERTIES ('has_encrypted_data'='false');
 
 CREATE EXTERNAL TABLE IF NOT EXISTS dbt_{user}_jaffle_shop.orders (
@@ -29,7 +30,7 @@ WITH SERDEPROPERTIES (
     'quoteChar' = '"',
     'skip.header.line.count' = '1' 
 ) 
-LOCATION '{bucket_base}/{user}/orders/'
+LOCATION '{bucket_base}/{user}/raw/orders/'
 TBLPROPERTIES ('has_encrypted_data'='false');
 
 CREATE EXTERNAL TABLE IF NOT EXISTS dbt_{user}_stripe.payment (
@@ -46,5 +47,5 @@ WITH SERDEPROPERTIES (
     'quoteChar' = '"',
     'skip.header.line.count' = '1' 
 ) 
-LOCATION '{bucket_base}/{user}/payments/'
+LOCATION '{bucket_base}/{user}/raw/payments/'
 TBLPROPERTIES ('has_encrypted_data'='false');

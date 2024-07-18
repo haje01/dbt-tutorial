@@ -15,12 +15,12 @@ services:
             timeout: 20s
             retries: 10
 
-  create-db:
+  init-postgres:
     build: 
-      context: postgresql
+      context: postgres
       dockerfile: Dockerfile
     volumes:
-      - ./postgresql:/app
+      - ./postgres:/app
       - ./data:/app/data
     environment:
       - POSTGRES_PASSWORD=docker

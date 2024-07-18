@@ -34,7 +34,7 @@ Athena 를 위해서는 현재 쉘에 다음과 같은 환경 변수가 지정�
 튜토리얼 진행 전 다음과 같은 Docker Compose 명령으로 AThena DB 를 준비합니다.
 
 ```sh
-docker-compose -f docker compose-athena.yaml up -d -e ACCESS_KEY=접근키 SECRET_KEY=비밀키 S3_BUCKET_BASE=S3버킷_기본경로 USER_ID=유저_식별자
+docker-compose -f docker compose-athena.yaml up -d
 ```
 
 docker-compose -f docker compose-athena.yaml up -d -e ACCESS_KEY=접근키 SECRET_KEY=비밀키 S3_BUCKET_BASE=S3버킷_기본경로 USER_ID=유저_식별자
