@@ -5,3 +5,6 @@ notes.txt
 jaffle_shop/target/
 logs/
 .env
+.vscode/
+tu_athena/
+tu_postgres/

@@ -12,15 +12,15 @@ ACCESS_KEY = os.getenv('AWS_ACCESS_KEY_ID')
 SECRET_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
 REGION_NAME = os.getenv('AWS_DEFAULT_REGION')
 # S3 버킷명 + 중간경로 + 'dbt/' 가 붙은 형태
-S3_BUCKET_BASE = os.getenv('S3_BUCKET_BASE')
-S3_BUCKET, S3_BASE = re.search(r's3://([^/]+)/(.*)', S3_BUCKET_BASE).groups()
-S3_OUTPUT_LOCATION = os.getenv('S3_OUTPUT_LOCATION')
+S3_DATA_DIR = os.getenv('S3_DATA_DIR')
+S3_BUCKET, S3_BASE = re.search(r's3://([^/]+)/(.*)', S3_DATA_DIR).groups()
+S3_STAGING_DIR = os.getenv('S3_STAGING_DIR')
 USER_ID = os.getenv('USER_ID')
 
-print("S3_BUCKET_BASE: ", S3_BUCKET_BASE)
+print("S3_DATA_DIR: ", S3_DATA_DIR)
 print("S3_BUCKET: ", S3_BUCKET)
 print("S3_BASE: ", S3_BASE)
-print("S3_OUTPUT_LOCATION: ", S3_OUTPUT_LOCATION)
+print("S3_STAGING_DIR: ", S3_STAGING_DIR)
 print("USER_ID: ", USER_ID)
 
 
@@ -121,13 +121,13 @@ if __name__ == "__main__":
     with open(Path(__file__).resolve().parent / "sql/create_tables.sql", "r") as f:
         query_text = f.read()
 
-    query_text = query_text.format(user=USER_ID, bucket_base=S3_BUCKET_BASE)
+    query_text = query_text.format(user=USER_ID, bucket_base=S3_DATA_DIR)
     queries = query_text.split(";")
     for query in queries:
         if len(query) == 0:
             continue
         print(query)
-        if not run_athena_query('default', query, S3_OUTPUT_LOCATION):
+        if not run_athena_query('default', query, S3_STAGING_DIR):
             break
 
     logger.info("Tables created")
